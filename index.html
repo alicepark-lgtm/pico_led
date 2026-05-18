@@ -18,32 +18,23 @@
       background: #0f0f1a;
       color: #e0e0e0;
       font-family: 'Segoe UI', sans-serif;
+      padding: 2rem;
+      gap: 1.5rem;
     }
 
-    h1 {
-      font-size: 1.8rem;
-      margin-bottom: 0.4rem;
-      letter-spacing: 0.05em;
-    }
+    h1 { font-size: 1.8rem; letter-spacing: 0.05em; }
 
-    .subtitle {
-      font-size: 0.9rem;
-      color: #888;
-      margin-bottom: 2.5rem;
-    }
+    .subtitle { font-size: 0.9rem; color: #888; }
 
     .status-bar {
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      margin-bottom: 2.5rem;
       font-size: 0.9rem;
       color: #aaa;
     }
-
     .dot {
-      width: 10px;
-      height: 10px;
+      width: 10px; height: 10px;
       border-radius: 50%;
       background: #555;
       transition: background 0.4s;
@@ -51,86 +42,98 @@
     .dot.connected { background: #4ade80; box-shadow: 0 0 6px #4ade80; }
     .dot.error      { background: #f87171; }
 
+    /* 4개 카드 가로 배치 */
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      justify-content: center;
+    }
+
     .card {
       background: #1a1a2e;
       border: 1px solid #2a2a4a;
       border-radius: 1.5rem;
-      padding: 2.5rem 3rem;
+      padding: 2rem 1.8rem;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1.5rem;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+      gap: 1.2rem;
+      width: 160px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      transition: border-color 0.3s;
     }
 
-    .led-indicator {
-      width: 80px;
-      height: 80px;
+    /* LED 표시등 */
+    .led-bulb {
+      width: 64px; height: 64px;
       border-radius: 50%;
       background: #2a2a3a;
       border: 3px solid #3a3a5a;
       transition: all 0.3s ease;
     }
-    .led-indicator.on {
-      background: #facc15;
-      border-color: #fbbf24;
-      box-shadow: 0 0 30px #facc15, 0 0 60px #facc1580;
-    }
 
-    .led-label {
+    /* 색별 ON 스타일 */
+    .card.green  .led-bulb.on { background:#4ade80; border-color:#22c55e; box-shadow: 0 0 24px #4ade80, 0 0 50px #4ade8060; }
+    .card.yellow .led-bulb.on { background:#facc15; border-color:#eab308; box-shadow: 0 0 24px #facc15, 0 0 50px #facc1560; }
+    .card.red    .led-bulb.on { background:#f87171; border-color:#ef4444; box-shadow: 0 0 24px #f87171, 0 0 50px #f8717160; }
+    .card.blue   .led-bulb.on { background:#60a5fa; border-color:#3b82f6; box-shadow: 0 0 24px #60a5fa, 0 0 50px #60a5fa60; }
+
+    .led-name {
       font-size: 0.85rem;
-      color: #666;
-      letter-spacing: 0.1em;
+      font-weight: 600;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
     }
+    .card.green  .led-name { color: #4ade80; }
+    .card.yellow .led-name { color: #facc15; }
+    .card.red    .led-name { color: #f87171; }
+    .card.blue   .led-name { color: #60a5fa; }
 
-    .buttons {
-      display: flex;
-      gap: 1rem;
+    .led-state {
+      font-size: 0.75rem;
+      color: #555;
+      letter-spacing: 0.1em;
     }
 
-    button {
-      padding: 0.75rem 2rem;
-      font-size: 1rem;
+    /* 켜기/끄기 버튼 */
+    .btn-row { display: flex; gap: 0.5rem; }
+
+    .btn-on, .btn-off {
+      padding: 0.5rem 0.9rem;
+      font-size: 0.85rem;
       border: none;
-      border-radius: 0.75rem;
+      border-radius: 0.6rem;
       cursor: pointer;
       font-weight: 600;
       transition: all 0.2s;
     }
-    button:disabled { opacity: 0.4; cursor: not-allowed; }
+    .btn-on:disabled, .btn-off:disabled { opacity: 0.35; cursor: not-allowed; }
 
-    .btn-on {
-      background: #4ade80;
-      color: #0a1a10;
-    }
-    .btn-on:hover:not(:disabled) {
-      background: #22c55e;
-      transform: translateY(-2px);
-    }
+    .btn-on  { background: #4ade80; color: #0a1a10; }
+    .btn-on:hover:not(:disabled)  { filter: brightness(1.15); transform: translateY(-1px); }
+    .btn-off { background: #374151; color: #d1d5db; }
+    .btn-off:hover:not(:disabled) { background: #4b5563; transform: translateY(-1px); }
 
-    .btn-off {
-      background: #f87171;
-      color: #1a0505;
+    /* 전체 켜기/끄기 버튼 */
+    .all-row {
+      display: flex;
+      gap: 1rem;
     }
-    .btn-off:hover:not(:disabled) {
-      background: #ef4444;
-      transform: translateY(-2px);
+    .btn-all {
+      padding: 0.65rem 1.8rem;
+      font-size: 0.9rem;
+      border: none;
+      border-radius: 0.75rem;
+      cursor: pointer;
+      font-weight: 700;
+      transition: all 0.2s;
     }
-
-    .topic-info {
-      margin-top: 1rem;
-      font-size: 0.75rem;
-      color: #555;
-      text-align: center;
-    }
-    code {
-      background: #111;
-      padding: 0.15rem 0.4rem;
-      border-radius: 0.3rem;
-      font-family: monospace;
-      color: #a78bfa;
-    }
+    .btn-all:disabled { opacity: 0.35; cursor: not-allowed; }
+    .btn-all-on  { background: #a78bfa; color: #0d0520; }
+    .btn-all-on:hover:not(:disabled)  { filter: brightness(1.15); transform: translateY(-1px); }
+    .btn-all-off { background: #374151; color: #d1d5db; }
+    .btn-all-off:hover:not(:disabled) { background: #4b5563; transform: translateY(-1px); }
   </style>
 </head>
 <body>
@@ -143,72 +146,110 @@
     <span id="status-text">브로커에 연결 중...</span>
   </div>
 
-  <div class="card">
-    <div class="led-indicator" id="led-indicator"></div>
-    <div class="led-label" id="led-label">LED OFF</div>
+  <!-- 4색 LED 카드 -->
+  <div class="grid">
+    <div class="card green" id="card-green">
+      <div class="led-bulb" id="bulb-green"></div>
+      <div class="led-name">초록</div>
+      <div class="led-state" id="state-green">OFF</div>
+      <div class="btn-row">
+        <button class="btn-on"  onclick="send('green','ON')"  id="on-green"  disabled>켜기</button>
+        <button class="btn-off" onclick="send('green','OFF')" id="off-green" disabled>끄기</button>
+      </div>
+    </div>
 
-    <div class="buttons">
-      <button class="btn-on"  id="btn-on"  onclick="sendCmd('ON')"  disabled>켜기</button>
-      <button class="btn-off" id="btn-off" onclick="sendCmd('OFF')" disabled>끄기</button>
+    <div class="card yellow" id="card-yellow">
+      <div class="led-bulb" id="bulb-yellow"></div>
+      <div class="led-name">노랑</div>
+      <div class="led-state" id="state-yellow">OFF</div>
+      <div class="btn-row">
+        <button class="btn-on"  onclick="send('yellow','ON')"  id="on-yellow"  disabled>켜기</button>
+        <button class="btn-off" onclick="send('yellow','OFF')" id="off-yellow" disabled>끄기</button>
+      </div>
+    </div>
+
+    <div class="card red" id="card-red">
+      <div class="led-bulb" id="bulb-red"></div>
+      <div class="led-name">빨강</div>
+      <div class="led-state" id="state-red">OFF</div>
+      <div class="btn-row">
+        <button class="btn-on"  onclick="send('red','ON')"  id="on-red"  disabled>켜기</button>
+        <button class="btn-off" onclick="send('red','OFF')" id="off-red" disabled>끄기</button>
+      </div>
+    </div>
+
+    <div class="card blue" id="card-blue">
+      <div class="led-bulb" id="bulb-blue"></div>
+      <div class="led-name">파랑</div>
+      <div class="led-state" id="state-blue">OFF</div>
+      <div class="btn-row">
+        <button class="btn-on"  onclick="send('blue','ON')"  id="on-blue"  disabled>켜기</button>
+        <button class="btn-off" onclick="send('blue','OFF')" id="off-blue" disabled>끄기</button>
+      </div>
     </div>
   </div>
 
-  <p class="topic-info">
-    MQTT topic: <code id="topic-display"></code>
-  </p>
+  <!-- 전체 제어 -->
+  <div class="all-row">
+    <button class="btn-all btn-all-on"  id="btn-all-on"  onclick="sendAll('ON')"  disabled>전체 켜기</button>
+    <button class="btn-all btn-all-off" id="btn-all-off" onclick="sendAll('OFF')" disabled>전체 끄기</button>
+  </div>
 
   <script>
     // ── 설정 ────────────────────────────────────────────────────
-    // ⚠️ TOPIC은 pico/main.py의 MQTT_TOPIC과 반드시 일치해야 합니다.
-    const TOPIC = 'pico-led/my-pico-001';   // ← 고유한 값으로 변경하세요
+    // ⚠️ pico/main.py의 BASE_TOPIC과 반드시 동일해야 합니다.
+    const BASE_TOPIC = 'pico-led/my-pico-001';
     const BROKER_URL = 'wss://broker.hivemq.com:8884/mqtt';
+    const COLORS     = ['green', 'yellow', 'red', 'blue'];
     // ────────────────────────────────────────────────────────────
-
-    document.getElementById('topic-display').textContent = TOPIC;
 
     const dot        = document.getElementById('dot');
     const statusText = document.getElementById('status-text');
-    const indicator  = document.getElementById('led-indicator');
-    const ledLabel   = document.getElementById('led-label');
-    const btnOn      = document.getElementById('btn-on');
-    const btnOff     = document.getElementById('btn-off');
 
-    const clientId = 'web-' + Math.random().toString(16).slice(2, 8);
-    const client = mqtt.connect(BROKER_URL, { clientId });
+    const client = mqtt.connect(BROKER_URL, {
+      clientId: 'web-' + Math.random().toString(16).slice(2, 8)
+    });
+
+    function setButtons(enabled) {
+      COLORS.forEach(c => {
+        document.getElementById('on-'  + c).disabled = !enabled;
+        document.getElementById('off-' + c).disabled = !enabled;
+      });
+      document.getElementById('btn-all-on').disabled  = !enabled;
+      document.getElementById('btn-all-off').disabled = !enabled;
+    }
 
     client.on('connect', () => {
-      dot.className = 'dot connected';
+      dot.className        = 'dot connected';
       statusText.textContent = '브로커 연결됨';
-      btnOn.disabled = false;
-      btnOff.disabled = false;
+      setButtons(true);
     });
 
     client.on('error', () => {
-      dot.className = 'dot error';
+      dot.className        = 'dot error';
       statusText.textContent = '연결 오류';
     });
 
     client.on('close', () => {
-      dot.className = 'dot';
+      dot.className        = 'dot';
       statusText.textContent = '연결 끊김 — 재연결 중...';
-      btnOn.disabled = true;
-      btnOff.disabled = true;
+      setButtons(false);
     });
 
-    function sendCmd(cmd) {
-      client.publish(TOPIC, cmd, { qos: 1 }, (err) => {
-        if (!err) updateUI(cmd === 'ON');
+    function send(color, state) {
+      const topic = `${BASE_TOPIC}/${color}`;
+      client.publish(topic, state, { qos: 1 }, (err) => {
+        if (!err) updateUI(color, state === 'ON');
       });
     }
 
-    function updateUI(isOn) {
-      if (isOn) {
-        indicator.className = 'led-indicator on';
-        ledLabel.textContent = 'LED ON';
-      } else {
-        indicator.className = 'led-indicator';
-        ledLabel.textContent = 'LED OFF';
-      }
+    function sendAll(state) {
+      COLORS.forEach(c => send(c, state));
+    }
+
+    function updateUI(color, isOn) {
+      document.getElementById('bulb-'  + color).className = 'led-bulb' + (isOn ? ' on' : '');
+      document.getElementById('state-' + color).textContent = isOn ? 'ON' : 'OFF';
     }
   </script>
 </body>
